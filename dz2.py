@@ -1,48 +1,51 @@
 import collections
 
 
-hexa_numbers_dict = collections.defaultdict(int)
-hexa_numbers_list1 = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+columns = ['h0', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8', 'h9', 'hA', 'hB', 'hC', 'hD', 'hE', 'hF']
+HexaNumbers = collections.namedtuple('HexaNumbers', columns)
+hexa_numbers = HexaNumbers('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F')
 a = list(input('Pleas enter: ').upper())
 b = list(input('Pleas enter: ').upper())
 a_decimal = 0
 b_decimal = 0
 c_decimal = 0
-c_mult = ''
-c_add = ''
-number = 15
+c_mult = []
+c_add = []
 
 
-def get_hexa_number(n, number=number, hnd=hexa_numbers_dict, hnl1=hexa_numbers_list1):
-    hexa_numbers_list2 = []
+def get_hexa_number(n, nt=hexa_numbers):
+    hexa_number = []
 
-    if n > number:
+    while True:
+        hexa_number.append(n % 16)
+        n = int(n/16)
+        if n < 16:
+            hexa_number.append(n)
+            break
 
-        while n >= number:
-            max_len_hexa_numbers = max([len(x) for x in hnd.keys()])
-            hexa_numbers_list2 = [x for x in hnd.keys() if len(x) == max_len_hexa_numbers]
+    for x in hexa_number:
+        hexa_number.append(nt[hexa_number[0]])
+        del hexa_number[0]
 
-            for i in range(1, 16):
-                for j in range(len(hexa_numbers_list2)):
-                    number += 1
-                    hnd[hnl1[i] + hexa_numbers_list2[j]] = number
+    len_hexa_number = len(hexa_number)
+    for _ in range(len_hexa_number):
+        hexa_number.append(hexa_number[len_hexa_number - 1])
+        del hexa_number[len_hexa_number - 1]
+        len_hexa_number -= 1
 
-        return [x[0] for x in hnd.items() if x[1] == n][0]
-    else:
-         return [x[0] for x in hnd.items() if x[1] == n][0]
+    return hexa_number
 
 
-for i in range(16):
-    hexa_numbers_dict[hexa_numbers_list1[i]] = i
-
+j1 = len(a) - 1
+j2 = len(b) - 1
 for i in range(max(len(a), len(b))):
-    if len(a) >= i:
-        a_decimal += hexa_numbers_dict[a[i]]
-    if len(b) >= i:
-        b_decimal += hexa_numbers_dict[a[i]]
-
+    if len(a) > i:
+        a_decimal += int(hexa_numbers.index(a[i])) * 16**j1
+        j1 -= 1
+    if len(b) > i:
+        b_decimal += int(hexa_numbers.index(b[i])) * 16**j2
+        j2 -= 1
 c_mult = get_hexa_number(a_decimal * b_decimal)
 c_add = get_hexa_number(a_decimal + b_decimal)
 
-print(f'Mult. : {c_mult}\n'
-      f'Add.  : {c_add}')
+print('Mult. : ', *c_mult, '\n', 'Add.  : ', *c_add, sep='')
