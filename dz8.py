@@ -1,7 +1,9 @@
 ls1 = []
+ls2 = []
+
 
 for i in range(5):
-    ls2 = []
+    ls2.clear()
     nums = input('Enter please a 3 numbers: ').split()
     for k in range(3):
         num = float(nums[k])
@@ -11,10 +13,10 @@ for i in range(5):
 
 max_lengths = []
 max_len = 0
-for list_2 in zip(ls1[0], ls1[1], ls1[2], ls1[3], ls1[4]):
-    for j in range(len(list_2)):
-        if len(str(list_2[j])) > max_len:
-            max_len = len(str(list_2[j]))
+for inside_list in zip(ls1[0], ls1[1], ls1[2], ls1[3], ls1[4]):
+    for j in range(len(inside_list)):
+        if len(str(inside_list[j])) > max_len:
+            max_len = len(str(inside_list[j]))
     max_lengths.append(max_len)
 
 print('+—-' + (' ' * sum(max_lengths)) + ' -—+')
