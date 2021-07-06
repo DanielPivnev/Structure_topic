@@ -1,9 +1,25 @@
-# Подсчитаваю, сколько было выделено памяти под переменные 1. домашнем задании 3-го урока.
+# Подсчитаваю, сколько было выделено памяти под переменные 4. домашнем задании 3-го урока.
 # Версия Питона: 3.9
 # ОC : macOS Big Sur (11.2.3)
 # Процессор: 64 битовый
 
+import random as rnd
 
+
+ls1 = [int(rnd.random()*10) for i in range(100)]
+ls2 = []
+
+
+for i in range(len(ls1)):
+    s = 0
+    for j in range(len(ls1)):
+        if ls1[i] == ls1[j]:
+            s += 1
+    ls2.append(s)
+
+max_numbers_amount_index = ls2.index(max(ls2))
+
+print(f'Most frequent numbers available = {ls1[max_numbers_amount_index]}')
 
 #
 # Размер numbers: Сами цифры --> 98 * 24 = 294 байта
