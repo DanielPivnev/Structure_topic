@@ -1,7 +1,7 @@
 import random
 
 
-ls = [random.randint(-100, 100) for _ in range(100)]
+ls1 = [random.randint(-100, 100) for _ in range(100)]
 
 
 def bubble_sort1(ls):
@@ -31,9 +31,9 @@ def improved_bubble_sort(ls):
 
 
 
-print(ls)
-print(bubble_sort1(ls))
-ls = [random.randint(-100, 100) for _ in range(100)]
+print(ls1)
+print(bubble_sort1(ls1))
+ls1 = [random.randint(-100, 100) for _ in range(100)]
 
-print(ls)
-print(improved_bubble_sort(ls))
+print(ls1)
+print(improved_bubble_sort(ls1))
